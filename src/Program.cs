@@ -50,6 +50,11 @@ namespace Redpanda.OpenFaaS
                 {
                     webBuilder.ConfigureAppConfiguration( configBuilder =>
                     {
+                        if ( System.IO.File.Exists( options.Config ) )
+                        {
+                            Console.WriteLine( $"Using '{options.Config}' configuration file." );
+                        }
+
                         configBuilder.SetBasePath( Environment.CurrentDirectory );
                         configBuilder.AddJsonFile( options.Config, optional: true, reloadOnChange: false );
                         configBuilder.AddEnvironmentVariables();

@@ -1,3 +1,4 @@
 .vscode/
+published/
 src/**/obj
 src/**/bin

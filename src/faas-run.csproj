@@ -4,12 +4,12 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
      <!-- The OS and CPU type you are targeting -->
-    <RuntimeIdentifier>ubuntu.16.10-x64</RuntimeIdentifier>
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
     <!-- Determine self-contained or framework-dependent -->
     <SelfContained>false</SelfContained>
     <!-- Enable single file -->
     <PublishSingleFile>true</PublishSingleFile>
-    <Version>0.2</Version>
+    <Version>0.2.1</Version>
     <Authors>Goncalo Oliveira</Authors>
     <Company>RedPanda Ltd</Company>
     <Description>FaaS runner for ASPNET functions</Description>
