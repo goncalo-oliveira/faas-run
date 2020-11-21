@@ -66,8 +66,13 @@ namespace Redpanda.OpenFaaS
                     } );
 
                     webBuilder.UseKestrel()
-                        .UseStartup<Startup>()
-                        .UseUrls( $"http://localhost:{options.Port}" );
+                        .UseStartup<Startup>();
+
+                    // when running outside Docker, the host will listen on localhost only
+                    if ( Environment.GetEnvironmentVariable( "FAAS_RUN_DOCKER" ) != "1" )
+                    {
+                        webBuilder.UseUrls( $"http://localhost:{options.Port}" );
+                    }
                 } );
     }
 }

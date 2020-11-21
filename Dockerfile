@@ -19,5 +19,6 @@ RUN dotnet publish -c release -o published faas-run.csproj
 
 # stage 2
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
+ENV FAAS_RUN_DOCKER 1
 WORKDIR /home/app/
 COPY --from=builder /source/faas-run/published/faas-run /usr/bin/
