@@ -49,6 +49,7 @@ namespace Redpanda.OpenFaaS
                 $"redpandaltd/faas-run:{imageTag}",
                 "faas-run",
                 $"/home/app/{assemblyFile}",
+                "-p 80",
                 options.NoAuth ? "--no-auth" : string.Empty,
                 !string.IsNullOrEmpty( configPath )
                     ? $"/home/app/config.json"
