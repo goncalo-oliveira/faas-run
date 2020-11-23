@@ -6,7 +6,7 @@
     <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
     <SelfContained>false</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
-    <Version>0.3.1</Version>
+    <Version>0.4</Version>
     <Authors>Goncalo Oliveira</Authors>
     <Company>RedPanda Ltd</Company>
     <Description>FaaS runner for ASPNET functions</Description>
@@ -18,7 +18,7 @@
     <PackageReference Include="CommandLineParser" Version="2.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="5.0.0" />
-    <PackageReference Include="Redpanda.OpenFaaS.Http" Version="0.2.1" />
+    <PackageReference Include="Redpanda.OpenFaaS.Functions" Version="0.1.1" />
   </ItemGroup>
 
 </Project>

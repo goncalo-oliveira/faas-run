@@ -116,7 +116,7 @@ namespace Redpanda.OpenFaaS
                     }
 
                 }
-                else if ( !options.AllowCustomPath && ( context.Request.Path != "/" ) )
+                else if ( !options.IgnoreRoutingRules && ( context.Request.Path != "/" ) )
                 {
                     // attribute template is null. reject custom path unless allowed by options
                     await WriteNotFoundAsync( context );
@@ -124,7 +124,7 @@ namespace Redpanda.OpenFaaS
                     return ( false );
                 }
             }
-            else if ( !options.AllowCustomPath && ( context.Request.Path != "/" ) )
+            else if ( !options.IgnoreRoutingRules && ( context.Request.Path != "/" ) )
             {
                 // if there are no http modifiers, we reject a custom path unless allowed by options
                 await WriteNotFoundAsync( context );
