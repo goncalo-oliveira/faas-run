@@ -22,11 +22,6 @@ namespace Redpanda.OpenFaaS
 
         public void RunDetached( Options options )
         {
-            if ( options.Local )
-            {
-                Console.WriteLine( "Option '--local' is ignored when running detached." );
-            }
-
             // to run detached we need the full path, not the relative
             var assemblyPath = System.IO.Path.GetFullPath( options.Assembly );
             var assemblyFile = System.IO.Path.GetFileName( assemblyPath );

@@ -18,9 +18,6 @@ namespace Redpanda.OpenFaaS
         [Option( "no-auth", HelpText = "Skip authentication/authorization")]
         public bool NoAuth { get; set; }
 
-        [Option( "local", HelpText = "Run on localhost only" )]
-        public bool Local { get; set; }
-
         [Option( 'd', "detach", HelpText = "Run function in background (Docker)" )]
         public bool Detach { get; set; }
 
@@ -82,11 +79,7 @@ namespace Redpanda.OpenFaaS
                     webBuilder.UseKestrel()
                         .UseStartup<Startup>();
 
-                    // run on localhost only
-                    if ( options.Local )
-                    {
-                        webBuilder.UseUrls( $"http://localhost:{options.Port}" );
-                    }
+                    webBuilder.UseUrls( $"http://*:{options.Port}" );
                 } );
     }
 }
