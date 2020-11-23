@@ -18,6 +18,12 @@ namespace Redpanda.OpenFaaS
         [Option( "no-auth", HelpText = "Skip authentication/authorization")]
         public bool NoAuth { get; set; }
 
+        [Option( "local", HelpText = "Run on localhost only" )]
+        public bool Local { get; set; }
+
+        [Option( 'd', "detach", HelpText = "Run function in background (Docker)" )]
+        public bool Detach { get; set; }
+
         [Value( 0, Required = true, MetaName = "assembly", HelpText = "Function assembly path" )]
         public string Assembly { get; set; }
     }
@@ -35,6 +41,14 @@ namespace Redpanda.OpenFaaS
 
             parsed.WithParsed( options =>
             {
+                if ( options.Detach )
+                {
+                    new Docker()
+                        .RunDetached( options );
+
+                    return;
+                }
+
                 Console.WriteLine( $"To debug attach to process id {processId}." );
                 Console.WriteLine();
 
@@ -68,8 +82,8 @@ namespace Redpanda.OpenFaaS
                     webBuilder.UseKestrel()
                         .UseStartup<Startup>();
 
-                    // when running outside Docker, the host will listen on localhost only
-                    if ( Environment.GetEnvironmentVariable( "FAAS_RUN_DOCKER" ) != "1" )
+                    // run on localhost only
+                    if ( options.Local )
                     {
                         webBuilder.UseUrls( $"http://localhost:{options.Port}" );
                     }
