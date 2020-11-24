@@ -4,6 +4,7 @@ using CommandLine;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Redpanda.OpenFaaS
 {
@@ -40,7 +41,7 @@ namespace Redpanda.OpenFaaS
             {
                 if ( options.Detach )
                 {
-                    new Docker()
+                    new DockerWrapper()
                         .RunDetached( options );
 
                     return;
@@ -57,6 +58,11 @@ namespace Redpanda.OpenFaaS
 
         public static IHostBuilder CreateHostBuilder( string[] args, Options options ) =>
             Host.CreateDefaultBuilder( args )
+                .ConfigureLogging( logging =>
+                {
+                    logging.AddFilter( "Microsoft.AspNetCore.DataProtection", LogLevel.Warning )
+                        .AddFilter( "Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor", LogLevel.Warning );
+                } )
                 .ConfigureWebHostDefaults( webBuilder =>
                 {
                     webBuilder.ConfigureAppConfiguration( configBuilder =>

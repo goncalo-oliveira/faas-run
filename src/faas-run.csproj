@@ -6,7 +6,7 @@
     <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
     <SelfContained>false</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
-    <Version>0.4</Version>
+    <Version>1.0</Version>
     <Authors>Goncalo Oliveira</Authors>
     <Company>RedPanda Ltd</Company>
     <Description>FaaS runner for ASPNET functions</Description>

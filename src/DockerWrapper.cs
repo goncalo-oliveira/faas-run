@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Redpanda.OpenFaaS
 {
-    internal class Docker
+    internal class DockerWrapper
     {
         private string GetImageTag()
         {

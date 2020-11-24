@@ -1,13 +1,10 @@
 using System;
-using System.Linq;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 
 namespace Redpanda.OpenFaaS
@@ -52,7 +49,6 @@ namespace Redpanda.OpenFaaS
 
             // add root request handler to the container
             services.AddSingleton<IRouteMatcher, RouteMatcher>();
-            services.AddTransient<HttpRequestHandler>();
             services.TryAddScoped<HttpAuthenticationHandler>();
             services.Configure<HttpRequestHandlerOptions>( options =>
             {
@@ -70,12 +66,13 @@ namespace Redpanda.OpenFaaS
         {
             app.UseDeveloperExceptionPage();
 
-            var requestHandler = app.ApplicationServices.GetRequiredService<HttpRequestHandler>();
-
             Console.WriteLine();
             Console.WriteLine( "Running..." );
 
-            app.Run( requestHandler.HandleAsync );
+            app.UseMiddleware<RoutingMiddleware>()
+                .UseMiddleware<AuthenticationMiddleware>()
+                .UseMiddleware<AuthorizationMiddleware>()
+                .UseMiddleware<FunctionMiddleware>();
         }
     }
 }
