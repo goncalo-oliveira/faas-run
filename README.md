@@ -30,3 +30,7 @@ By default, `faas-run` listens on port 9000. You can change this using the `--po
 ### Configuration
 
 If a `config.json` file exists, it is added to the configuration pipeline, thus, available for the function in runtime. You can also specify a different configuration file by using the `--config` option.
+
+#### Secrets
+
+On an OpenFaaS cluster, secrets that the function has access to are loaded into the configuration model, prepended with the prefix `openfaas_secret_`. When running locally, we can add values into the `config.json` file using just the same prefix.
