@@ -37,6 +37,8 @@ namespace Redpanda.OpenFaaS
             Console.WriteLine("OpenFaaS ASPNET Function Loader");
             Console.WriteLine();
 
+            //AppDomain.CurrentDomain.AssemblyLoad += OnAssemblyLoad;
+
             parsed.WithParsed( options =>
             {
                 if ( options.Detach )
@@ -87,5 +89,10 @@ namespace Redpanda.OpenFaaS
 
                     webBuilder.UseUrls( $"http://*:{options.Port}" );
                 } );
+
+        private static void OnAssemblyLoad( object sender, AssemblyLoadEventArgs args )
+        {
+            System.Diagnostics.Trace.WriteLine( "loaded " + args.LoadedAssembly.GetName().Name );
+        }
     }
 }

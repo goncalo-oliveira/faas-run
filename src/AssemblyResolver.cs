@@ -22,16 +22,16 @@ namespace Redpanda.OpenFaaS
             packagesPath = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.UserProfile ), ".nuget/packages/" );
 
             // load main assembly
-            var assemblyPath = Path.Combine( Environment.CurrentDirectory, path );
+            var assemblyPath = Path.GetFullPath( path );
             Assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath( assemblyPath );
 
-            Console.WriteLine( $"Loaded function assembly '{path}'." );
+            Console.WriteLine( $"Loaded function assembly {path}." );
 
             dependencyContext = DependencyContext.Load( Assembly );
             resolver = new CompositeCompilationAssemblyResolver(
                 new ICompilationAssemblyResolver[]
                 {
-                    new AppBaseCompilationAssemblyResolver( Path.GetDirectoryName( path ) ),
+                    new AppBaseCompilationAssemblyResolver( Path.GetDirectoryName( assemblyPath ) ),
                     new ReferenceAssemblyPathResolver(),
                     new PackageCompilationAssemblyResolver()
                 } );
@@ -83,9 +83,11 @@ namespace Redpanda.OpenFaaS
 
                 if (assemblies.Count > 0)
                 {
-                    Console.WriteLine( $"Loaded dependency '{assemblies[0]}'." );
+                    var dependency = loadContext.LoadFromAssemblyPath(assemblies[0]);
 
-                    return loadContext.LoadFromAssemblyPath(assemblies[0]);
+                    Console.WriteLine( $"Loaded dependency {assemblies[0]}." );
+
+                    return ( dependency );
                 }
             }
 
@@ -95,9 +97,9 @@ namespace Redpanda.OpenFaaS
 
             try
             {
-                Console.WriteLine( $"Loaded dependency '{Path.GetFileName( path )}'." );
+                var dependency = loadContext.LoadFromAssemblyPath( path );
 
-                return loadContext.LoadFromAssemblyPath( path );
+                Console.WriteLine( $"Loaded dependency {Path.GetFileName( path )}." );
             }
             catch ( Exception ex )
             {

@@ -15,7 +15,7 @@ RUN dotnet restore
 COPY src/. .
 
 # build and publish
-RUN dotnet publish -c release -o published faas-run.csproj
+RUN dotnet publish -c release -r linux-x64 --no-self-contained /p:PublishSingleFile=true -o published faas-run.csproj
 
 # stage 2
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
