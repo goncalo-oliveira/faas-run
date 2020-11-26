@@ -11,7 +11,7 @@ namespace Redpanda.OpenFaaS
         
         public static void AddFunctionServices( this IServiceCollection services, IConfiguration configuration )
         {
-            var type = AssemblyResolver.Default.Assembly.GetType( typeName);
+            var type = AssemblyResolver.Default.Assembly.GetType( typeName );
 
             if ( type == null )
             {

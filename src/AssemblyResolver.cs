@@ -100,6 +100,8 @@ namespace Redpanda.OpenFaaS
                 var dependency = loadContext.LoadFromAssemblyPath( path );
 
                 Console.WriteLine( $"Loaded dependency {Path.GetFileName( path )}." );
+
+                return ( dependency );
             }
             catch ( Exception ex )
             {
