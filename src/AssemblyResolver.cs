@@ -7,7 +7,7 @@ using System.Runtime.Loader;
 using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.DependencyModel.Resolution;
 
-namespace Redpanda.OpenFaaS
+namespace OpenFaaS
 {
     internal sealed class AssemblyResolver : IDisposable
     {

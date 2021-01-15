@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Routing;
 
-namespace Redpanda.OpenFaaS
+namespace OpenFaaS
 {
     internal interface IRouteMatcher
     {

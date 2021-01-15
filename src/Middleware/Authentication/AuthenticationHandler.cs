@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Redpanda.OpenFaaS;
+using OpenFaaS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Redpanda.OpenFaaS
+namespace OpenFaaS
 {
     internal class HttpAuthenticationHandler
     {

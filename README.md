@@ -1,10 +1,10 @@
 # FaaS Runner for ASPNET Functions
 
-FaaS Runner (or just `faas-run`) is one of the components of ASPNET Functions for OpenFaaS. It uses a plugin architecture to dynamically load a function assembly and host the function execution. It is used by the [OpenFaaS ASPNET Template](https://github.com/redpandaltd/faas-aspnet-template), but it can also be used separately.
+FaaS Runner (or just `faas-run`) is one of the components of ASPNET Functions for OpenFaaS. It uses a plugin architecture to dynamically load a function assembly and host the function execution. It is used by the [OpenFaaS ASPNET Template](https://github.com/goncalo-oliveira/faas-aspnet-template), but it can also be used separately.
 
 ## Installing
 
-Go to the [Releases](https://github.com/redpandaltd/faas-run/releases) page and download the appropriate binary for your platform. You can also pull the Docker image from [Docker Hub](https://hub.docker.com/r/redpandaltd/faas-run).
+Go to the [Releases](https://github.com/goncalo-oliveira/faas-run/releases) page and download the appropriate binary for your platform. You can also pull the Docker image from [Docker Hub](https://hub.docker.com/r/goncalo-oliveira/faas-run).
 
 ## Usage
 

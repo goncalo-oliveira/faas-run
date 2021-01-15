@@ -2,10 +2,12 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Redpanda.OpenFaaS
+namespace OpenFaaS
 {
     internal class DockerWrapper
     {
+        private readonly string dockerImage = "goncalo-oliveira/faas-run";
+
         private string GetImageTag()
         {
             // image tag should match the assembly version
@@ -46,7 +48,7 @@ namespace Redpanda.OpenFaaS
                 !string.IsNullOrEmpty( configPath )
                     ? $"-v {configPath}:/home/app/config.json:ro"
                     : string.Empty,
-                $"redpandaltd/faas-run:{imageTag}",
+                $"{dockerImage}:{imageTag}",
                 "faas-run",
                 $"/home/app/{assemblyFile}",
                 "-p 80",
@@ -60,11 +62,11 @@ namespace Redpanda.OpenFaaS
 
             var dockerArgs = string.Join( (char)0x20, args );
 
-            // Console.WriteLine( $"docker pull redpandaltd/faas-run:{imageTag}" );
+            // Console.WriteLine( $"docker pull {dockerImage}:{imageTag}" );
             // Console.WriteLine( "docker " + dockerArgs );
 
             // pull faas-run image
-            var pullExitCode = Exec( "docker", $"pull redpandaltd/faas-run:{imageTag}" );
+            var pullExitCode = Exec( "docker", $"pull {dockerImage}:{imageTag}" );
 
             if ( pullExitCode > 0 )
             {
@@ -81,7 +83,7 @@ namespace Redpanda.OpenFaaS
             }
 
             // display container info
-            Exec( "docker", $"ps --filter ancestor=redpandaltd/faas-run:{imageTag}" );
+            Exec( "docker", $"ps --filter ancestor={dockerImage}:{imageTag}" );
         }
 
         private int Exec( string fileName, string args = null )

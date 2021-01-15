@@ -1,6 +1,6 @@
 using System;
 
-namespace Redpanda.OpenFaaS
+namespace OpenFaaS
 {
     internal class HttpRequestHandlerOptions
     {

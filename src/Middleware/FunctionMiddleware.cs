@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Routing;
 
-namespace Redpanda.OpenFaaS
+namespace OpenFaaS
 {
     /// <summary>
     /// Deals with function execution and response handling

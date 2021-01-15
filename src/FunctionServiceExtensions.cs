@@ -3,7 +3,7 @@ using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Redpanda.OpenFaaS
+namespace OpenFaaS
 {
     internal static class FunctionServiceExtensions
     {

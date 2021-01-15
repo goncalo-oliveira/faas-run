@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Redpanda.OpenFaaS
+namespace OpenFaaS
 {
     internal class RouteMatcher : IRouteMatcher
     {

@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Redpanda.OpenFaaS;
+using OpenFaaS;
 using System.Linq;
 
-namespace Redpanda.OpenFaaS
+namespace OpenFaaS
 {
     internal static class HttpFunctionExtensions
     {

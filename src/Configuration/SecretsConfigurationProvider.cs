@@ -1,7 +1,8 @@
 using System;
 using System.IO;
+using Microsoft.Extensions.Configuration;
 
-namespace Microsoft.Extensions.Configuration.OpenFaaSSecrets
+namespace OpenFaaS.Configuration
 {
     internal class SecretsConfigurationProvider : ConfigurationProvider
     {

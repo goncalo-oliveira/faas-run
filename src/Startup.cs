@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json.Serialization;
 
-namespace Redpanda.OpenFaaS
+namespace OpenFaaS
 {
     public class Startup
     {

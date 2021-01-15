@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Configuration.EnvironmentVariables;
-using Microsoft.Extensions.Configuration.OpenFaaSSecrets;
+using OpenFaaS.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;

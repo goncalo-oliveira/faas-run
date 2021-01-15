@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
-namespace Microsoft.Extensions.Configuration.OpenFaaSSecrets
+namespace OpenFaaS.Configuration
 {
     internal class SecretsConfigurationSource : IConfigurationSource
     {
