@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace OpenFaaS
+namespace OpenFaaS.Functions.Middleware
 {
     /// <summary>
     /// Deals with authorization

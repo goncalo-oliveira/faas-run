@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Routing;
 
-namespace OpenFaaS
+namespace OpenFaaS.Functions.Middleware
 {
     /// <summary>
     /// Deals with function execution and response handling

@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenFaaS
+namespace OpenFaaS.Functions
 {
     internal class HttpRequestHandlerOptions
     {

@@ -1,25 +1,24 @@
 using System;
-using Microsoft.AspNetCore.Authentication;
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Newtonsoft.Json.Serialization;
 
 namespace OpenFaaS
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup( IConfiguration configuration )
         {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        private Action<IApplicationBuilder, IWebHostEnvironment> configure;
+
+        public void ConfigureServices( IServiceCollection services )
         {
             services.AddCors( options =>
             {
@@ -34,45 +33,22 @@ namespace OpenFaaS
                 options.LowercaseUrls = true;
             } );
 
-            services.AddMvc()
-                .AddNewtonsoftJson( options =>
-                {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-                } );
-            // Replaced with Newtonsoft because Microsoft's serializer doesn't do polymorphic serialization
+            services.ConfigurePluginServices( Configuration );
 
-            services.AddSingleton<ISystemClock, SystemClock>();
+            bool isHttpFunction = services.Any( x => x.ServiceType == typeof( IHttpFunction ) );
 
-            // allow function implementation to add services to the container
-            services.AddFunctionServices( Configuration );
+            IPluginStartup pluginStartup = isHttpFunction
+                ? new Functions.Startup( Configuration )
+                : new Api.Startup( Configuration );
 
-            // add root request handler to the container
-            services.AddSingleton<IRouteMatcher, RouteMatcher>();
-            services.TryAddScoped<HttpAuthenticationHandler>();
-            services.Configure<HttpRequestHandlerOptions>( options =>
-            {
-                options.SkipAuth = Configuration.GetValue<bool>( "Args:SkipAuth" );
+            pluginStartup.ConfigureServices( services );
 
-                if ( options.SkipAuth )
-                {
-                    Console.WriteLine( "Skipping authentication and authorization" );
-                }
-            } );
+            configure = pluginStartup.Configure;
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure( IApplicationBuilder app, IWebHostEnvironment env )
         {
-            app.UseDeveloperExceptionPage();
-
-            Console.WriteLine();
-            Console.WriteLine( "Running..." );
-
-            app.UseMiddleware<RoutingMiddleware>()
-                .UseMiddleware<AuthenticationMiddleware>()
-                .UseMiddleware<AuthorizationMiddleware>()
-                .UseMiddleware<FunctionMiddleware>();
+            configure?.Invoke( app, env );
         }
     }
 }

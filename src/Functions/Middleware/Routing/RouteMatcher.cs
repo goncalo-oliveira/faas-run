@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenFaaS
+namespace OpenFaaS.Functions.Middleware
 {
     internal class RouteMatcher : IRouteMatcher
     {
