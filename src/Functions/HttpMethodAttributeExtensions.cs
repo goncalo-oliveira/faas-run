@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
+using OpenFaaS.Functions.Middleware;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenFaaS
+namespace OpenFaaS.Functions
 {
     internal static class HttpMethodAttributeExtensions
     {

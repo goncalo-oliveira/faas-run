@@ -37,8 +37,6 @@ namespace OpenFaaS
             Console.WriteLine("OpenFaaS ASPNET Function Loader");
             Console.WriteLine();
 
-            //AppDomain.CurrentDomain.AssemblyLoad += OnAssemblyLoad;
-
             parsed.WithParsed( options =>
             {
                 if ( options.Detach )
@@ -84,9 +82,8 @@ namespace OpenFaaS
                         } );
                     } );
 
-                    webBuilder.UseKestrel()
-                        .UseStartup<Startup>();
-
+                    webBuilder.UseKestrel();
+                    webBuilder.UseStartup<Startup>();
                     webBuilder.UseUrls( $"http://*:{options.Port}" );
                 } );
 

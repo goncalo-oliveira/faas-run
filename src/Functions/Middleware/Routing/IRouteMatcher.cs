@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Routing;
 
-namespace OpenFaaS
+namespace OpenFaaS.Functions.Middleware
 {
     internal interface IRouteMatcher
     {

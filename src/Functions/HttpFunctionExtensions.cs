@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using OpenFaaS;
 using System.Linq;
 
-namespace OpenFaaS
+namespace OpenFaaS.Functions
 {
     internal static class HttpFunctionExtensions
     {
