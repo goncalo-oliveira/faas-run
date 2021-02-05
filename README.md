@@ -4,7 +4,7 @@ FaaS Runner (or just `faas-run`) is one of the components of ASPNET Functions fo
 
 ## Installing
 
-Go to the [Releases](https://github.com/goncalo-oliveira/faas-run/releases) page and download the appropriate binary for your platform. You can also pull the Docker image from [Docker Hub](https://hub.docker.com/r/goncalo-oliveira/faas-run).
+Go to the [Releases](https://github.com/goncalo-oliveira/faas-run/releases) page and download the appropriate binary for your platform. You can also pull the Docker image from [GitHub](https://github.com/goncalo-oliveira/faas-run/packages/511219).
 
 ## Usage
 
