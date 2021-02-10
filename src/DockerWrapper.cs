@@ -6,7 +6,7 @@ namespace OpenFaaS
 {
     internal class DockerWrapper
     {
-        private readonly string dockerImage = "goncalo-oliveira/faas-run";
+        private readonly string dockerImage = "docker.pkg.github.com/goncalo-oliveira/faas-run/faas-run";
 
         private string GetImageTag()
         {
@@ -25,8 +25,9 @@ namespace OpenFaaS
         public void RunDetached( Options options )
         {
             // to run detached we need the full path, not the relative
-            var assemblyPath = System.IO.Path.GetFullPath( options.Assembly );
-            var assemblyFile = System.IO.Path.GetFileName( assemblyPath );
+            var assemblyFullPath = System.IO.Path.GetFullPath( options.Assembly );
+            var assemblyPath = System.IO.Path.GetDirectoryName( assemblyFullPath );
+            var assemblyFile = System.IO.Path.GetFileName( assemblyFullPath );
 
             var configPath = !string.IsNullOrEmpty( options.Config ) && System.IO.File.Exists( options.Config )
                 ? System.IO.Path.GetFullPath( options.Config )
@@ -44,9 +45,9 @@ namespace OpenFaaS
                 "run",
                 "-d",
                 $"-p {options.Port}:80",
-                $"-v {assemblyPath}:/home/app/{assemblyFile}:ro",
+                $"-v {assemblyPath}:/home/app/:ro",
                 !string.IsNullOrEmpty( configPath )
-                    ? $"-v {configPath}:/home/app/config.json:ro"
+                    ? $"-v {configPath}:/home/config.json:ro"
                     : string.Empty,
                 $"{dockerImage}:{imageTag}",
                 "faas-run",
@@ -54,7 +55,7 @@ namespace OpenFaaS
                 "-p 80",
                 options.NoAuth ? "--no-auth" : string.Empty,
                 !string.IsNullOrEmpty( configPath )
-                    ? $"/home/app/config.json"
+                    ? "--config /home/config.json"
                     : string.Empty,
             }
             .Where( x => !string.IsNullOrEmpty( x ) )
@@ -62,8 +63,9 @@ namespace OpenFaaS
 
             var dockerArgs = string.Join( (char)0x20, args );
 
-            // Console.WriteLine( $"docker pull {dockerImage}:{imageTag}" );
-            // Console.WriteLine( "docker " + dockerArgs );
+            //  Console.WriteLine( $"docker pull {dockerImage}:{imageTag}" );
+            //  Console.WriteLine( "docker " + dockerArgs );
+            //  return;
 
             // pull faas-run image
             var pullExitCode = Exec( "docker", $"pull {dockerImage}:{imageTag}" );
