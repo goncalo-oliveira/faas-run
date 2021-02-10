@@ -1,5 +1,5 @@
 # stage 1
-FROM mcr.microsoft.com/dotnet/sdk:5.0 as builder
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim as builder
 
 # suppress data collection
 ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
