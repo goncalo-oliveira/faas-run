@@ -22,6 +22,9 @@ namespace OpenFaaS
         [Option( 'd', "detach", HelpText = "Run function in background (Docker)" )]
         public bool Detach { get; set; }
 
+        [Option( "container-name", HelpText = "Name for container when running in background (Docker)" )]
+        public string ContainerName { get; set; }
+
         [Value( 0, Required = true, MetaName = "assembly", HelpText = "Function assembly path" )]
         public string Assembly { get; set; }
     }

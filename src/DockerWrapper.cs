@@ -13,6 +13,11 @@ namespace OpenFaaS
             // image tag should match the assembly version
             var imageTag = GetType().Assembly.GetName().Version.ToString( 3 );
 
+#if DEBUG
+            imageTag = "1.6.1";
+            Console.WriteLine( "WARN: This is a developer build using a fixed Docker 1.6.1 image tag." );
+#endif
+
             if ( imageTag.EndsWith( ".0" ) )
             {
                 // trim revision number if zero
@@ -44,6 +49,9 @@ namespace OpenFaaS
             {
                 "run",
                 "-d",
+                !string.IsNullOrEmpty( options.ContainerName )
+                    ? $"--name faas_{options.ContainerName}"
+                    : string.Empty,
                 $"-p {options.Port}:80",
                 $"-v {assemblyPath}:/home/app/:ro",
                 !string.IsNullOrEmpty( configPath )
