@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Newtonsoft.Json.Serialization;
 
 namespace OpenFaaS.Functions
 {
@@ -21,13 +20,7 @@ namespace OpenFaaS.Functions
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices( IServiceCollection services )
         {
-            services.AddMvc()
-                .AddNewtonsoftJson( options =>
-                {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-                } );
-            // Replaced with Newtonsoft because Microsoft's serializer doesn't do polymorphic serialization
+            services.AddMvc();
 
             services.AddSingleton<ISystemClock, SystemClock>();
 
