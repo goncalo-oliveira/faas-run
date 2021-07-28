@@ -35,4 +35,4 @@ If a `config.json` file exists, it is added to the configuration pipeline, thus,
 
 On an OpenFaaS cluster, secrets that the function has access to are loaded into the configuration model, prepended with the prefix `_secret_`. When running locally, we can add values into the `config.json` file using just the same prefix.
 
-NOTE: The value of the secrets in the `config.json` file need to be base64 encoded.
+> NOTE: The value of the secrets in the `config.json` file need to be base64 encoded.
