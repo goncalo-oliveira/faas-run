@@ -4,7 +4,7 @@ FaaS Runner (or just `faas-run`) is one of the components of ASPNET Functions fo
 
 ## Installing
 
-Go to the [Releases](https://github.com/goncalo-oliveira/faas-run/releases) page and download the appropriate binary for your platform. You can also pull the Docker image from [Docker Hub](https://hub.docker.com/r/goncalo-oliveira/faas-run).
+Go to the [Releases](https://github.com/goncalo-oliveira/faas-run/releases) page and download the appropriate binary for your platform. You can also pull the Docker image from [GitHub](https://github.com/goncalo-oliveira/faas-run/packages/511219).
 
 ## Usage
 
@@ -34,3 +34,5 @@ If a `config.json` file exists, it is added to the configuration pipeline, thus,
 #### Secrets
 
 On an OpenFaaS cluster, secrets that the function has access to are loaded into the configuration model, prepended with the prefix `_secret_`. When running locally, we can add values into the `config.json` file using just the same prefix.
+
+> NOTE: The value of the secrets in the `config.json` file need to be base64 encoded.
