@@ -20,7 +20,7 @@ namespace OpenFaaS.Api
 
         public void ConfigureServices( IServiceCollection services )
         {
-            services.AddControllers()
+            services.AddControllers( options => services.ConfigurePluginMvc( options ) )
                 .AddPluginControllers();
         }
 

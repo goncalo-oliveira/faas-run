@@ -28,12 +28,10 @@ namespace OpenFaaS
                        .AllowAnyHeader() );
             } );
 
-            services.AddRouting( options =>
-            {
-                options.LowercaseUrls = true;
-            } );
-
-            services.ConfigurePluginServices( Configuration );
+            // initializes plugin type
+            services.AddPlugin( Configuration )
+                .AddRouting( options => services.ConfigurePluginRouting( options ) )
+                .ConfigurePluginServices();
 
             bool isHttpFunction = services.Any( x => x.ServiceType == typeof( IHttpFunction ) );
 
